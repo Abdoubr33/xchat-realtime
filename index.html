@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b14">
+<title>XChat — Private room</title>
+<style>
+:root{--bg:#080b14;--panel:#101729;--panel2:#151f35;--line:#ffffff14;--text:#eef3ff;--muted:#95a4c0;--blue:#55a5ff;--purple:#9270ff;--green:#42d6a0}
+*{box-sizing:border-box}body{margin:0;color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(ellipse at 75% 0%,#27336a80,transparent 38%),radial-gradient(ellipse at 0% 100%,#12375a66,transparent 35%),var(--bg);min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;color:inherit}.shell{max-width:1100px;height:100dvh;max-height:1000px;min-height:580px;margin:auto;padding:18px;display:grid;grid-template-columns:270px 1fr;gap:15px}.side,.chat{min-height:0;border:1px solid var(--line);border-radius:24px;background:#101729eF;backdrop-filter:blur(20px);box-shadow:0 20px 70px #0003}.side{padding:22px 16px;display:flex;flex-direction:column;gap:22px}.brand{display:flex;align-items:center;gap:11px}.logo{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--purple));font-size:23px;box-shadow:0 8px 28px #675bff44}.brand h1{font-size:21px;line-height:1;margin:0;letter-spacing:-.7px}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.7px;text-transform:uppercase;margin-top:6px}.card{background:#ffffff06;border:1px solid var(--line);border-radius:16px;padding:14px}.label{font-size:10px;letter-spacing:1.7px;text-transform:uppercase;color:#8392b0;font-weight:800;margin:0 0 10px}.you{display:flex;align-items:center;gap:10px}.avatar{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#286aa9,#7654cb);font-weight:800}.you input{width:100%;min-width:0;background:#090f1e;border:1px solid var(--line);border-radius:10px;padding:9px;color:var(--text);outline:none}.primary,.secondary{border:0;border-radius:12px;padding:11px 14px;font-weight:750}.primary{background:linear-gradient(110deg,#439cff,#8965ff);box-shadow:0 8px 22px #586bff20}.primary:disabled{opacity:.55;cursor:wait}.secondary{background:#ffffff0b;border:1px solid var(--line);color:#c8d5ec}.wide{width:100%}.side p{font-size:12px;color:var(--muted);margin:9px 0 0}.status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}.tip{margin-top:auto;font-size:12px;color:var(--muted);line-height:1.7;padding:0 5px}.chat{display:flex;flex-direction:column;overflow:hidden}.top{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}.room-avatar{width:43px;height:43px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#244f84,#6b51bd);font-size:20px}.topcopy{flex:1;min-width:0}.topcopy h2{font-size:16px;margin:0 0 3px}.topcopy p{font-size:12px;color:var(--muted);margin:0}.top-actions{display:flex;gap:8px}.messages{flex:1;overflow:auto;padding:22px clamp(13px,3vw,32px);display:flex;flex-direction:column;gap:15px}.welcome{text-align:center;align-self:center;max-width:380px;margin:auto;padding:24px}.welcome .hero{font-size:34px;margin-bottom:8px}.welcome h3{margin:0 0 7px;font-size:18px}.welcome p{color:var(--muted);font-size:13px;margin:0}.msg{display:flex;gap:9px;max-width:85%;align-items:flex-end}.msg.mine{align-self:flex-end;flex-direction:row-reverse}.mini{width:30px;height:30px;flex:0 0 30px;border-radius:10px;font-size:11px}.body{min-width:0}.who{font-size:11px;color:var(--muted);margin:0 0 4px 3px}.mine .who{text-align:right}.bubble{background:#1a2740;border:1px solid #ffffff0b;border-radius:5px 15px 15px 15px;padding:10px 13px;overflow-wrap:anywhere;white-space:pre-wrap}.mine .bubble{background:linear-gradient(135deg,#2869ae,#5747a7);border-radius:15px 5px 15px 15px}.stamp{font-size:10px;color:#8c9ab5;margin:4px 3px}.mine .stamp{text-align:right}.media{display:block;max-width:min(100%,360px);max-height:280px;border-radius:12px;margin-top:8px}.file{display:inline-block;color:#cfe2ff;margin-top:7px;overflow-wrap:anywhere}.compose{padding:13px 17px 17px;border-top:1px solid var(--line);background:#0b1120}.hint{font-size:11px;color:var(--muted);margin:0 0 8px 4px}.compose form{display:flex;align-items:center;gap:8px;padding:8px;background:#080e1a;border:1px solid var(--line);border-radius:15px}.compose input[type=file]{display:none}.attach{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;color:#a8b8d3;font-size:21px;cursor:pointer}.attach:hover{background:#ffffff12}.compose input[type=text]{flex:1;min-width:0;background:transparent;color:var(--text);border:0;outline:0;padding:10px 3px}.send{width:43px;height:39px;padding:0;font-size:18px}.notice{position:fixed;left:50%;bottom:22px;transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#1b2941;border:1px solid #ffffff20;border-radius:12px;padding:11px 16px;z-index:5;box-shadow:0 12px 35px #0006;transition:.2s;font-size:13px;max-width:90vw}.notice.show{opacity:1;transform:translate(-50%,0)}.overlay{position:fixed;inset:0;background:#050914dd;display:grid;place-items:center;padding:20px;z-index:10}.setup{width:min(100%,520px);border-radius:22px;background:#111a2c;border:1px solid var(--line);padding:24px;box-shadow:0 30px 100px #0009}.setup h2{margin:0 0 8px}.setup p,.setup li{font-size:13px;color:var(--muted);line-height:1.65}.setup code{color:#c7ddff;overflow-wrap:anywhere}.setup input{width:100%;background:#080e1a;color:var(--text);border:1px solid var(--line);padding:11px;border-radius:10px;margin:6px 0 12px}.setup-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.hidden{display:none!important}
+@media(max-width:700px){.shell{display:block;height:100dvh;min-height:0;padding:0}.side{display:none}.chat{height:100dvh;border:0;border-radius:0}.top{padding:13px}.top-actions .secondary{display:none}.messages{padding:15px 11px}.msg{max-width:96%}.compose{padding:9px}.setup{padding:19px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><div class="logo">✦</div><div><h1>XChat</h1><small>talk without limits</small></div></div>
+    <div class="card"><div class="label">Your profile</div><div class="you"><div class="avatar" id="myAvatar">Y</div><input id="displayName" maxlength="32" placeholder="Your name" value="Your name" aria-label="Your display name"></div><button class="secondary wide" id="saveName" style="margin-top:11px">Save name</button></div>
+    <div class="card"><div class="label">Invite your friend</div><p style="margin:0 0 12px">Create a room and send your friend its link. They can open it to join this chat.</p><button class="primary wide" id="newRoom">＋ Create new chat link</button><button class="secondary wide" id="copyLink" style="margin-top:8px">Copy current invite link</button></div>
+    <div class="card"><div class="label">Room status</div><div class="status"><span class="dot"></span><span id="roomStatus">Connecting…</span></div><p id="roomIdLabel" style="overflow-wrap:anywhere">Room: loading</p></div>
+    <div class="tip">✨ Your messages sync live when Firebase is configured. Share the room link only with people you want in this conversation.</div>
+  </aside>
+  <main class="chat">
+    <header class="top"><div class="room-avatar">✦</div><div class="topcopy"><h2 id="roomTitle">XChat room</h2><p id="topStatus">Preparing your room…</p></div><div class="top-actions"><button class="secondary" id="shareBtn">↗ Invite</button><button class="secondary" id="copyRoomBtn">Copy link</button></div></header>
+    <section class="messages" id="messages"><div class="welcome"><div class="hero">💬</div><h3>Your conversation starts here</h3><p>Send a message, share a photo or video, or invite a friend using the room link.</p></div></section>
+    <footer class="compose"><p class="hint">Chatting in <strong id="roomHint">your room</strong> · <span id="fileHint">Photos and videos supported</span></p><form id="sendForm"><label class="attach" title="Attach photos or videos">＋<input type="file" id="mediaInput" accept="image/*,video/*" multiple></label><input type="text" id="messageInput" maxlength="3000" placeholder="Write a message…" autocomplete="off" aria-label="Write a message"><button class="primary send" id="sendBtn" type="submit" aria-label="Send message">➤</button></form></footer>
+  </main>
+</div>
+<div class="notice" id="notice" role="status"></div>
+<div class="overlay" id="setupOverlay">
+ <div class="setup">
+  <h2>🚀 Set up XChat</h2>
+  <p>This is a real-time chat template. To let different people chat from their own devices, connect it to a free Firebase project. You only need to do this once.</p>
+  <ol>
+   <li>Open <code>https://console.firebase.google.com/</code> and create a project.</li>
+   <li>Add a Web App (the <code>&lt;/&gt;</code> icon) and copy its Firebase config values below.</li>
+   <li>In Build → Authentication, enable <strong>Anonymous</strong> sign-in.</li>
+   <li>Create a Realtime Database and Storage bucket. Apply the security rules included with this HTML download's setup instructions.</li>
+  </ol>
+  <label for="configBox" style="font-size:12px;color:#c5d4ed">Paste your Firebase web config object (the { apiKey: ... } part)</label>
+  <input id="configBox" placeholder="Paste Firebase config here" autocomplete="off">
+  <p id="setupError" style="color:#ff9eaa"></p>
+  <div class="setup-actions"><button class="primary" id="connectBtn">Connect XChat</button><button class="secondary" id="demoBtn">Try local demo</button><button class="secondary" id="closeSetup">Not now</button></div>
+ </div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInAnonymously, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, push, set, onChildAdded, serverTimestamp, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+const $=s=>document.querySelector(s);
+let appFB,auth,db,storage,user,roomId,unsubscribeMessages=null,localDemo=false,noticeTimer;
+const params=new URLSearchParams(location.search);
+function showNotice(t){const n=$('#notice');n.textContent=t;n.classList.add('show');clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>n.classList.remove('show'),3200)}
+function makeId(){return crypto.randomUUID().replaceAll('-','').slice(0,20)}
+function safeName(){return ($('#displayName').value.trim()||'Guest').slice(0,32)}
+function roomLink(id){const u=new URL(location.href);u.searchParams.set('room',id);return u.toString()}
+async function copyCurrentLink(){const link=roomLink(roomId);try{await navigator.clipboard.writeText(link);showNotice('Invite link copied. Send it to your friend!')}catch{prompt('Copy this invite link and send it to your friend:',link)}}
+function setStatus(t){$('#roomStatus').textContent=t;$('#topStatus').textContent=t}
+function renderMessage(m){
+ const empty=$('#messages .welcome');if(empty)empty.remove();
+ const row=document.createElement('div');row.className='msg'+(user&&m.uid===user.uid?' mine':'');
+ const avatar=document.createElement('div');avatar.className='avatar mini';avatar.textContent=(m.name||'G').trim().charAt(0).toUpperCase();
+ const body=document.createElement('div');body.className='body';
+ const who=document.createElement('div');who.className='who';who.textContent=m.name||'Guest';
+ const bubble=document.createElement('div');bubble.className='bubble';
+ if(m.text){bubble.textContent=m.text;body.append(who,bubble)}
+ else body.append(who);
+ if(m.mediaUrl){
+   if((m.mediaType||'').startsWith('image/')){const img=document.createElement('img');img.className='media';img.src=m.mediaUrl;img.alt=m.fileName||'Shared image';img.loading='lazy';body.append(img)}
+   else if((m.mediaType||'').startsWith('video/')){const v=document.createElement('video');v.className='media';v.controls=true;v.preload='metadata';v.src=m.mediaUrl;body.append(v)}
+   else{const a=document.createElement('a');a.className='file';a.href=m.mediaUrl;a.target='_blank';a.rel='noopener';a.textContent='📎 '+(m.fileName||'Open attachment');body.append(a)}
+ }
+ const stamp=document.createElement('div');stamp.className='stamp';stamp.textContent=m.createdAt?new Date(m.createdAt).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):'Just now';body.append(stamp);
+ row.append(avatar,body);$('#messages').append(row);$('#messages').scrollTop=$('#messages').scrollHeight;
+}
+function resetMessages(){if(unsubscribeMessages){unsubscribeMessages();unsubscribeMessages=null}$('#messages').innerHTML='<div class="welcome"><div class="hero">💬</div><h3>Your conversation starts here</h3><p>Send a message, share a photo or video, or invite a friend using the room link.</p></div>'}
+async function startFirebase(config){
+ try{
+  appFB=initializeApp(config);auth=getAuth(appFB);db=getDatabase(appFB);storage=getStorage(appFB);
+  await signInAnonymously(auth);
+  onAuthStateChanged(auth,async u=>{
+   if(!u)return;user=u;localDemo=false;
+   setStatus('Connected · live chat');$('#setupOverlay').classList.add('hidden');
+   if(!$('#displayName').value.trim()||$('#displayName').value==='Your name')$('#displayName').value='Guest-'+u.uid.slice(0,4);
+   $('#myAvatar').textContent=safeName().charAt(0).toUpperCase();
+   await enterRoom(roomId);
+  });
+ }catch(e){$('#setupError').textContent='Could not connect: '+e.message+' Check your Firebase config and enable Anonymous Authentication.';$('#setupOverlay').classList.remove('hidden');setStatus('Setup required')}
+}
+async function enterRoom(id){
+ roomId=id;const url=new URL(location.href);url.searchParams.set('room',id);history.replaceState({},'',url);
+ $('#roomIdLabel').textContent='Room: '+id;$('#roomHint').textContent=id.slice(0,8)+'…';$('#roomTitle').textContent='XChat · '+id.slice(0,6);
+ resetMessages();
+ if(localDemo){setStatus('Local demo · not online');$('#topStatus').textContent='Messages stay in this browser';return}
+ if(!db||!user)return;
+ const roomRef=ref(db,'rooms/'+id+'/createdAt');
+ try{await set(ref(db,'rooms/'+id+'/members/'+user.uid),{name:safeName(),joinedAt:serverTimestamp()});onValue(roomRef,snap=>{if(!snap.exists())set(roomRef,serverTimestamp())},{onlyOnce:true});
+  const msgs=ref(db,'rooms/'+id+'/messages');
+  unsubscribeMessages=onChildAdded(msgs,snap=>renderMessage(snap.val()||{}),err=>showNotice('Could not read messages: '+err.message));
+ }catch(e){showNotice('Room error: '+e.message+' Check database rules.')}
+}
+$('#connectBtn').addEventListener('click',async()=>{
+ const raw=$('#configBox').value.trim();let config;
+ try{config=Function('"use strict"; return ('+raw.replace(/;\s*$/,'')+')')();if(!config||!config.apiKey||!config.databaseURL||!config.projectId){throw new Error('Include apiKey, projectId and databaseURL from your Firebase config.')}}catch(e){$('#setupError').textContent='Config error: '+e.message;return}
+ $('#setupError').textContent='Connecting…';$('#connectBtn').disabled=true;
+ await startFirebase(config);$('#connectBtn').disabled=false;
+});
+$('#demoBtn').addEventListener('click',async()=>{localDemo=true;user={uid:'local-'+makeId()};roomId=roomId||makeId();$('#setupOverlay').classList.add('hidden');setStatus('Local demo · not online');await enterRoom(roomId);showNotice('Demo mode: messages do not reach other people.')});
+$('#closeSetup').addEventListener('click',()=>$('#setupOverlay').classList.add('hidden'));
+$('#saveName').addEventListener('click',async()=>{const n=safeName();$('#myAvatar').textContent=n.charAt(0).toUpperCase();if(auth?.currentUser){try{await updateProfile(auth.currentUser,{displayName:n})}catch{}}showNotice('Display name updated for new messages.')});
+$('#newRoom').addEventListener('click',async()=>{const id=makeId();await enterRoom(id);await copyCurrentLink()});
+$('#copyLink').addEventListener('click',copyCurrentLink);$('#copyRoomBtn').addEventListener('click',copyCurrentLink);$('#shareBtn').addEventListener('click',async()=>{const link=roomLink(roomId);if(navigator.share){try{await navigator.share({title:'Join my XChat room',text:'Chat with me on XChat',url:link})}catch{}}else copyCurrentLink()});
+$('#sendForm').addEventListener('submit',async e=>{
+ e.preventDefault();const text=$('#messageInput').value.trim();const file=$('#mediaInput').files[0];
+ if(!text&&!file)return;
+ if(localDemo){renderMessage({uid:user.uid,name:safeName(),text,createdAt:Date.now()});$('#messageInput').value='';$('#mediaInput').value='';return}
+ if(!db||!user){showNotice('Connect Firebase first to send messages to your friend.');$('#setupOverlay').classList.remove('hidden');return}
+ $('#sendBtn').disabled=true;let mediaUrl='',mediaType='',fileName='';
+ try{
+  if(file){
+   if(file.size>50*1024*1024)throw new Error('Please choose a file smaller than 50 MB.');
+   fileName=file.name;mediaType=file.type||'application/octet-stream';
+   const path='chatUploads/'+roomId+'/'+user.uid+'/'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+   const uploaded=await uploadBytes(storageRef(storage,path),file);mediaUrl=await getDownloadURL(uploaded.ref);
+  }
+  const newRef=push(ref(db,'rooms/'+roomId+'/messages'));
+  await set(newRef,{uid:user.uid,name:safeName(),text,mediaUrl,mediaType,fileName,createdAt:Date.now()});
+  $('#messageInput').value='';$('#mediaInput').value='';
+ }catch(err){showNotice('Send failed: '+err.message)}
+ finally{$('#sendBtn').disabled=false}
+});
+roomId=params.get('room')||makeId();$('#roomIdLabel').textContent='Room: '+roomId;$('#roomHint').textContent=roomId.slice(0,8)+'…';$('#roomTitle').textContent='XChat · '+roomId.slice(0,6);
+</script>
+</body>
+</html>
